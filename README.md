@@ -15,18 +15,18 @@ docker volume create ssh-keys
 docker volume create ansible
 
 # Run docker container
-docker run -it -v ansible:/etc/ansible -v ssh-keys:/root/.ssh schmot1s/netapp-ansible /bin/bash
+docker run -it -v ansible:/etc/ansible -v ssh-keys:/root/.ssh schmots1/netapp-ansible /bin/bash
 
 # clone github repo
 cd /etc/ansible
-git clone https://github.com/auto-store/lod-ansible-"user"
+git clone https://github.com/auto-store/lod-ansible-3
 
 # create and share ssh-keys with remote RHEL host
 ssh-keygen 
 ssh-copy-id root@192.168.0.69
 
 # copy hosts file to correct directory
-cp /etc/ansible/lod-ansible-"user"/hosts /etc/ansible/
+cp /etc/ansible/lod-ansible-3/hosts /etc/ansible/
 
 # ping host to check connectivity with RHEL host 
 ansible -m ping rhel
@@ -35,8 +35,8 @@ ansible -m ping rhel
 ansible-playbook install-nfs-utils.yml
 
 # run playbook for single volume
-change into repo directory ---> cd lod-ansible-"user"
-ansible-playbook flexvol-create.yml
+change into repo directory ---> cd lod-ansible-3
+ansible-playbook flexvolcreate.yml
 
 # run role to configure ONTAP cluster (insepct it in VSCODE to see what it does!)
 ansible-playbook cluster-role.yml 
